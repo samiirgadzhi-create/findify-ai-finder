@@ -17,7 +17,7 @@ const Auth = () => {
     // Placeholder for auth logic
     setTimeout(() => {
       setIsLoading(false);
-      navigate("/");
+      navigate("/dashboard");
     }, 1000);
   };
 
