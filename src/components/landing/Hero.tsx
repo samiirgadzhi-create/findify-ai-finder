@@ -6,7 +6,7 @@ export const Hero = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-accent via-background to-background">
+    <section className="relative overflow-hidden bg-gradient-to-br from-accent via-background to-background pt-24">
       <div className="container mx-auto px-4 py-20 md:py-32">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 animate-fade-in">
@@ -15,8 +15,9 @@ export const Hero = () => {
               <span className="inline-block">🚀</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-xl">
-              AI tool that finds viral products based on niche, trend, and store data. 
-              Stop guessing, start winning.
+              Our AI analyzes millions of TikTok ads, Facebook campaigns, and successful stores 
+              to find products that actually sell. Stop wasting time on losers—let our AI do the research 
+              while you focus on scaling your business.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
