@@ -19,7 +19,7 @@ const plans = [
   },
   {
     name: "Pro",
-    price: "₹499",
+    price: "₹149",
     period: "/month",
     description: "For serious dropshippers",
     features: [
@@ -36,7 +36,7 @@ const plans = [
   },
   {
     name: "Business",
-    price: "₹999",
+    price: "₹499",
     period: "/month",
     description: "For agencies & teams",
     features: [
