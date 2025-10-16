@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import dashboardPreview from "@/assets/dashboard-preview.png";
 
 export const Hero = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-accent via-background to-background pt-24">
-      <div className="container mx-auto px-4 py-20 md:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-br from-accent via-background to-background pt-20">
+      <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 animate-fade-in">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
@@ -37,8 +38,8 @@ export const Hero = () => {
           <div className="relative animate-fade-in">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 blur-3xl rounded-full"></div>
             <img 
-              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop"
-              alt="Findify Dashboard"
+              src={dashboardPreview}
+              alt="Findify Dashboard Preview"
               className="relative rounded-lg shadow-elegant hover-scale"
             />
           </div>
