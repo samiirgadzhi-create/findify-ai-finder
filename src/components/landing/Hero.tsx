@@ -12,14 +12,16 @@ export const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 animate-fade-in">
             {/* Trust Badge */}
-            <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
-              <span className="text-sm font-semibold text-primary">#2 Trusted Powerful Winning Product Tool</span>
-              <div className="flex items-center gap-0.5">
-                <Star className="w-4 h-4 fill-primary text-primary" />
-                <Star className="w-4 h-4 fill-primary text-primary" />
-                <Star className="w-4 h-4 fill-primary text-primary" />
-                <Star className="w-4 h-4 fill-primary text-primary" />
-                <Star className="w-4 h-4 fill-primary text-primary" />
+            <div className="flex justify-center lg:justify-start">
+              <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
+                <span className="text-sm font-semibold text-primary">#2 Trusted Powerful Winning Product Tool</span>
+                <div className="flex items-center gap-0.5">
+                  <Star className="w-4 h-4 fill-primary text-primary" />
+                  <Star className="w-4 h-4 fill-primary text-primary" />
+                  <Star className="w-4 h-4 fill-primary text-primary" />
+                  <Star className="w-4 h-4 fill-primary text-primary" />
+                  <Star className="w-4 h-4 fill-primary text-primary" />
+                </div>
               </div>
             </div>
             
