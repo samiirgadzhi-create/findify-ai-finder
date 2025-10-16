@@ -32,6 +32,9 @@ export const Footer = () => {
               AI-powered platform for dropshippers to find winning products. 
               Stop guessing, start winning.
             </p>
+            <p className="text-sm text-muted-foreground mt-4">
+              Founded by <span className="font-semibold text-foreground">Sameer Ansari</span>
+            </p>
           </div>
           
           <div>
