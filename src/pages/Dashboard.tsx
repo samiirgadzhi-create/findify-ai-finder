@@ -2,6 +2,7 @@ import { useState } from "react";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { SearchFilters } from "@/components/dashboard/SearchFilters";
 import { ProductGrid } from "@/components/dashboard/ProductGrid";
+import { NichesSection } from "@/components/dashboard/NichesSection";
 
 const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -28,6 +29,8 @@ const Dashboard = () => {
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
         />
+
+        <NichesSection onNicheSelect={setSelectedNiche} />
 
         <ProductGrid
           searchQuery={searchQuery}

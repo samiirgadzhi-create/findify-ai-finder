@@ -19,13 +19,15 @@ interface SearchFiltersProps {
 
 const niches = [
   { value: "all", label: "All Niches" },
+  { value: "home", label: "Home & Kitchen Essentials" },
+  { value: "health", label: "Health & Fitness" },
+  { value: "beauty", label: "Beauty & Personal Care" },
+  { value: "pets", label: "Pet Accessories" },
+  { value: "electronics", label: "Tech & Gadgets" },
+  { value: "toys", label: "Baby & Kids" },
   { value: "fashion", label: "Fashion & Accessories" },
-  { value: "beauty", label: "Beauty & Cosmetics" },
-  { value: "home", label: "Home & Garden" },
-  { value: "electronics", label: "Electronics & Gadgets" },
-  { value: "pets", label: "Pet Supplies" },
-  { value: "sports", label: "Sports & Fitness" },
-  { value: "toys", label: "Toys & Kids" },
+  { value: "car", label: "Car Accessories" },
+  { value: "diy", label: "Home Improvement / DIY Tools" },
 ];
 
 const countries = [
