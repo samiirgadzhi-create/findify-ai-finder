@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import dashboardPreview from "@/assets/dashboard-preview.png";
 
@@ -11,6 +11,18 @@ export const Hero = () => {
       <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 animate-fade-in">
+            {/* Trust Badge */}
+            <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
+              <span className="text-sm font-semibold text-primary">#2 Trusted Powerful Winning Product Tool</span>
+              <div className="flex items-center gap-0.5">
+                <Star className="w-4 h-4 fill-primary text-primary" />
+                <Star className="w-4 h-4 fill-primary text-primary" />
+                <Star className="w-4 h-4 fill-primary text-primary" />
+                <Star className="w-4 h-4 fill-primary text-primary" />
+                <Star className="w-4 h-4 fill-primary text-primary" />
+              </div>
+            </div>
+            
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
               Find Winning Dropshipping Products in Seconds{" "}
               <span className="inline-block">🚀</span>

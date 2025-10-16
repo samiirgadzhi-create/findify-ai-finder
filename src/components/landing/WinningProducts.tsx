@@ -1,4 +1,4 @@
-import { TrendingUp, Target, DollarSign } from "lucide-react";
+import { TrendingUp, Target, DollarSign, Shield, Award, CheckCircle, Star } from "lucide-react";
 
 const benefits = [
   {
@@ -29,6 +29,23 @@ export const WinningProducts = () => {
           <p className="text-2xl font-semibold text-foreground">
             Get instantly all data on product. It's magical
           </p>
+          
+          {/* Trust Badges */}
+          <div className="flex items-center justify-center gap-6 py-4">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Shield className="w-5 h-5 text-primary" />
+              <span className="font-medium">Secure</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Award className="w-5 h-5 text-primary" />
+              <span className="font-medium">Award Winning</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <CheckCircle className="w-5 h-5 text-primary" />
+              <span className="font-medium">Verified</span>
+            </div>
+          </div>
+          
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Unlock AI-powered insights on product trends and ad engagement, updated 8x daily. 
             Effortlessly spot bestsellers and avoid underperformers.
