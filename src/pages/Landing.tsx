@@ -2,6 +2,7 @@ import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
 import { TrustBadges } from "@/components/landing/TrustBadges";
 import { WinningProducts } from "@/components/landing/WinningProducts";
+import { WinningAds } from "@/components/landing/WinningAds";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Features } from "@/components/landing/Features";
 import { Stats } from "@/components/landing/Stats";
@@ -18,6 +19,7 @@ const Landing = () => {
       <Hero />
       <WinningProducts />
       <TrustBadges />
+      <WinningAds />
       <HowItWorks />
       <Features />
       <Stats />
