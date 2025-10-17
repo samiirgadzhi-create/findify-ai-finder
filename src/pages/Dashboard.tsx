@@ -3,6 +3,7 @@ import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { SearchFilters } from "@/components/dashboard/SearchFilters";
 import { ProductGrid } from "@/components/dashboard/ProductGrid";
 import { NichesSection } from "@/components/dashboard/NichesSection";
+import { Chatbot } from "@/components/Chatbot";
 
 const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -38,6 +39,7 @@ const Dashboard = () => {
           selectedCountry={selectedCountry}
         />
       </main>
+      <Chatbot />
     </div>
   );
 };

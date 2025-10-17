@@ -11,6 +11,7 @@ import { Testimonials } from "@/components/landing/Testimonials";
 import { FAQ } from "@/components/landing/FAQ";
 import { CTA } from "@/components/landing/CTA";
 import { Footer } from "@/components/landing/Footer";
+import { Chatbot } from "@/components/Chatbot";
 
 const Landing = () => {
   return (
@@ -28,6 +29,7 @@ const Landing = () => {
       <FAQ />
       <CTA />
       <Footer />
+      <Chatbot />
     </div>
   );
 };
