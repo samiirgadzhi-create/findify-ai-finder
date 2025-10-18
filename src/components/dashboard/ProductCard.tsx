@@ -14,6 +14,7 @@ interface Product {
   trend: string;
   sales: string;
   supplierLink: string;
+  roposoLink?: string;
 }
 
 interface ProductCardProps {
@@ -29,12 +30,12 @@ export const ProductCard = ({
 }: ProductCardProps) => {
   const { toast } = useToast();
 
-  const handleSupplierClick = () => {
+  const handleSupplierClick = (supplier: string, link: string) => {
     toast({
-      title: "Opening Supplier Link",
-      description: "Redirecting to product supplier page...",
+      title: `Opening ${supplier}`,
+      description: `Redirecting to ${supplier} product page...`,
     });
-    window.open(product.supplierLink, "_blank");
+    window.open(link, "_blank");
   };
 
   return (
@@ -89,15 +90,26 @@ export const ProductCard = ({
         </div>
       </CardContent>
 
-      <CardFooter className="p-4 pt-0 gap-2">
-        <Button
-          className="flex-1 gradient-bg"
-          onClick={handleSupplierClick}
-        >
-          View Supplier
-          <ExternalLink className="ml-2 h-4 w-4" />
-        </Button>
-        <Button variant="outline" className="flex-1">
+      <CardFooter className="p-4 pt-0 gap-2 flex-col">
+        <div className="grid grid-cols-2 gap-2 w-full">
+          <Button
+            className="gradient-bg"
+            onClick={() => handleSupplierClick("AliExpress", product.supplierLink)}
+          >
+            AliExpress
+            <ExternalLink className="ml-2 h-4 w-4" />
+          </Button>
+          {product.roposoLink && (
+            <Button
+              variant="secondary"
+              onClick={() => handleSupplierClick("Roposo", product.roposoLink!)}
+            >
+              Roposo
+              <ExternalLink className="ml-2 h-4 w-4" />
+            </Button>
+          )}
+        </div>
+        <Button variant="outline" className="w-full">
           View Insights
         </Button>
       </CardFooter>

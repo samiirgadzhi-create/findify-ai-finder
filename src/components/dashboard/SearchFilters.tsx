@@ -15,6 +15,7 @@ interface SearchFiltersProps {
   setSelectedNiche: (niche: string) => void;
   selectedCountry: string;
   setSelectedCountry: (country: string) => void;
+  hideNicheFilter?: boolean;
 }
 
 const niches = [
@@ -46,10 +47,11 @@ export const SearchFilters = ({
   setSelectedNiche,
   selectedCountry,
   setSelectedCountry,
+  hideNicheFilter = false,
 }: SearchFiltersProps) => {
   return (
     <div className="bg-card border border-border rounded-lg p-6 mb-8 shadow-elegant">
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className={`grid ${hideNicheFilter ? 'md:grid-cols-2' : 'md:grid-cols-3'} gap-4`}>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
@@ -60,18 +62,20 @@ export const SearchFilters = ({
           />
         </div>
 
-        <Select value={selectedNiche} onValueChange={setSelectedNiche}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select niche" />
-          </SelectTrigger>
-          <SelectContent className="bg-background">
-            {niches.map((niche) => (
-              <SelectItem key={niche.value} value={niche.value}>
-                {niche.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        {!hideNicheFilter && (
+          <Select value={selectedNiche} onValueChange={setSelectedNiche}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select niche" />
+            </SelectTrigger>
+            <SelectContent className="bg-background">
+              {niches.map((niche) => (
+                <SelectItem key={niche.value} value={niche.value}>
+                  {niche.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
 
         <Select value={selectedCountry} onValueChange={setSelectedCountry}>
           <SelectTrigger>

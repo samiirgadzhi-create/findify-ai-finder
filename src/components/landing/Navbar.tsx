@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, Sparkles } from "lucide-react";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -34,6 +34,10 @@ export const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
+            <Button variant="outline" onClick={() => navigate("/niche-selection")}>
+              <Sparkles className="mr-2 h-4 w-4" />
+              Find Products
+            </Button>
             <Button variant="ghost" onClick={() => navigate("/auth")}>
               Login
             </Button>
