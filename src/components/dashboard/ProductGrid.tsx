@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProductCard } from "./ProductCard";
 import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+import { Download, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Mock product data - organized by niche
 const mockProducts = [
@@ -531,7 +532,17 @@ export const ProductGrid = ({
   selectedCountry,
 }: ProductGridProps) => {
   const [favorites, setFavorites] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+
+  // Simulate loading products
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [selectedNiche, selectedCountry, searchQuery]);
 
   const filteredProducts = mockProducts.filter((product) => {
     const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -559,20 +570,41 @@ export const ProductGrid = ({
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold">
-            {filteredProducts.length} Products Found
+          <h2 className="text-2xl font-bold flex items-center gap-2">
+            {isLoading ? (
+              <>
+                <Loader2 className="h-6 w-6 animate-spin text-primary" />
+                Loading Products...
+              </>
+            ) : (
+              `${filteredProducts.length} Products Found`
+            )}
           </h2>
           <p className="text-sm text-muted-foreground">
-            Updated 2 hours ago • Real-time data
+            {isLoading ? "Fetching latest data..." : "Updated 2 hours ago • Real-time data"}
           </p>
         </div>
-        <Button onClick={handleExport} variant="outline">
+        <Button onClick={handleExport} variant="outline" disabled={isLoading}>
           <Download className="mr-2 h-4 w-4" />
           Export List
         </Button>
       </div>
 
-      {filteredProducts.length === 0 ? (
+      {isLoading ? (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div key={index} className="space-y-3">
+              <Skeleton className="h-[200px] w-full rounded-xl" />
+              <Skeleton className="h-4 w-3/4" />
+              <Skeleton className="h-4 w-1/2" />
+              <div className="flex gap-2">
+                <Skeleton className="h-8 w-20" />
+                <Skeleton className="h-8 w-20" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : filteredProducts.length === 0 ? (
         <div className="text-center py-20">
           <p className="text-xl text-muted-foreground">
             No products found matching your filters.
