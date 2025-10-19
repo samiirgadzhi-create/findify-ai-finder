@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { Home, Dumbbell, Sparkles, PawPrint, Smartphone, Baby, Shirt, Car, Wrench } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { Chatbot } from "@/components/Chatbot";
+import { useUserProfile } from "@/hooks/useUserProfile";
 
 const niches = [
   { icon: Home, label: "Home & Kitchen Essentials", value: "home" },
@@ -18,10 +20,26 @@ const niches = [
 
 const NicheSelection = () => {
   const navigate = useNavigate();
+  const { user, loading } = useUserProfile();
+
+  // Redirect to auth if not logged in
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate("/auth");
+    }
+  }, [user, loading, navigate]);
 
   const handleNicheSelect = (nicheValue: string) => {
     navigate(`/products/${nicheValue}`);
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-muted/20">

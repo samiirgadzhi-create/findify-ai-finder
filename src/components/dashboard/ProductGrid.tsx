@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ProductCard } from "./ProductCard";
 import { Button } from "@/components/ui/button";
-import { Download, Loader2 } from "lucide-react";
+import { Download, Loader2, Lock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -528,12 +528,14 @@ interface ProductGridProps {
   searchQuery: string;
   selectedNiche: string;
   selectedCountry: string;
+  planType?: 'free' | 'pro' | 'business';
 }
 
 export const ProductGrid = ({
   searchQuery,
   selectedNiche,
   selectedCountry,
+  planType = 'free',
 }: ProductGridProps) => {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -554,6 +556,11 @@ export const ProductGrid = ({
     const matchesCountry = selectedCountry === "all" || product.country === selectedCountry;
     return matchesSearch && matchesNiche && matchesCountry;
   });
+
+  // Limit products for free plan
+  const productLimit = planType === 'free' ? 6 : filteredProducts.length;
+  const displayProducts = filteredProducts.slice(0, productLimit);
+  const hasMoreProducts = filteredProducts.length > productLimit;
 
   const toggleFavorite = (productId: string) => {
     setFavorites((prev) =>
@@ -585,7 +592,7 @@ export const ProductGrid = ({
             )}
           </h2>
           <p className="text-sm text-muted-foreground">
-            {isLoading ? "Fetching latest data..." : "Updated 2 hours ago • Real-time data"}
+            {isLoading ? "Fetching latest data..." : `Updated 2 hours ago • Real-time data${planType === 'free' ? ` • Showing ${displayProducts.length}` : ''}`}
           </p>
         </div>
         <Button onClick={handleExport} variant="outline" disabled={isLoading}>
@@ -618,16 +625,37 @@ export const ProductGrid = ({
           </p>
         </div>
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              isFavorite={favorites.includes(product.id)}
-              onToggleFavorite={() => toggleFavorite(product.id)}
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {displayProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                isFavorite={favorites.includes(product.id)}
+                onToggleFavorite={() => toggleFavorite(product.id)}
+              />
+            ))}
+          </div>
+          
+          {hasMoreProducts && planType === 'free' && (
+            <div className="mt-8 p-8 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl border border-primary/20 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
+                <Lock className="h-8 w-8 text-primary" />
+              </div>
+              <h3 className="text-2xl font-bold mb-2">Unlock All Products</h3>
+              <p className="text-muted-foreground max-w-md mx-auto mb-6">
+                You've reached the free plan limit. Upgrade to Pro to access all {filteredProducts.length} products and unlock unlimited searches.
+              </p>
+              <Button 
+                size="lg"
+                className="gradient-bg"
+                onClick={() => window.location.href = "/#pricing"}
+              >
+                Upgrade to Pro
+              </Button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

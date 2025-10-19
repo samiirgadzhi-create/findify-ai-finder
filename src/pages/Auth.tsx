@@ -9,12 +9,15 @@ import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const emailSchema = z.string()
   .trim()
   .min(1, "Email is required")
   .email("Please enter a valid email address")
-  .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Invalid email format");
+  .refine((email) => email.endsWith("@gmail.com"), {
+    message: "Only Gmail addresses are accepted",
+  });
 
 const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,10 +40,11 @@ const Auth = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, isSignup: boolean = false) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
 
     // Validate email
     if (!validateEmail(email)) {
@@ -58,13 +62,49 @@ const Auth = () => {
     }
 
     setIsLoading(true);
-    // Placeholder for auth logic with CAPTCHA validation
-    setTimeout(() => {
-      setIsLoading(false);
+    
+    try {
+      if (isSignup) {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/`,
+          }
+        });
+
+        if (error) throw error;
+
+        toast({
+          title: "Account Created!",
+          description: "You can now start finding winning products.",
+        });
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (error) throw error;
+
+        toast({
+          title: "Welcome back!",
+          description: "You've successfully logged in.",
+        });
+      }
+
       recaptchaRef.current?.reset();
       setCaptchaToken(null);
-      navigate("/dashboard");
-    }, 1000);
+      navigate("/niche-selection");
+    } catch (error: any) {
+      toast({
+        title: "Authentication Error",
+        description: error.message || "An error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const onCaptchaChange = (token: string | null) => {
@@ -96,14 +136,14 @@ const Auth = () => {
               </TabsList>
               
               <TabsContent value="login">
-                <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+                <form onSubmit={(e) => handleSubmit(e, false)} className="space-y-4 mt-4">
                   <div className="space-y-2">
-                    <Label htmlFor="login-email">Email</Label>
+                    <Label htmlFor="login-email">Email (Gmail only)</Label>
                     <Input 
                       id="login-email" 
                       name="email"
                       type="email" 
-                      placeholder="you@example.com" 
+                      placeholder="you@gmail.com" 
                       required 
                       onChange={(e) => validateEmail(e.target.value)}
                     />
@@ -116,7 +156,7 @@ const Auth = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="login-password">Password</Label>
-                    <Input id="login-password" type="password" required />
+                    <Input id="login-password" name="password" type="password" required />
                   </div>
                   
                   <div className="flex justify-center">
@@ -134,18 +174,14 @@ const Auth = () => {
               </TabsContent>
               
               <TabsContent value="signup">
-                <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+                <form onSubmit={(e) => handleSubmit(e, true)} className="space-y-4 mt-4">
                   <div className="space-y-2">
-                    <Label htmlFor="signup-name">Full Name</Label>
-                    <Input id="signup-name" type="text" placeholder="John Doe" required />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="signup-email">Email</Label>
+                    <Label htmlFor="signup-email">Email (Gmail only)</Label>
                     <Input 
                       id="signup-email" 
                       name="email"
                       type="email" 
-                      placeholder="you@example.com" 
+                      placeholder="you@gmail.com" 
                       required 
                       onChange={(e) => validateEmail(e.target.value)}
                     />
@@ -158,7 +194,7 @@ const Auth = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="signup-password">Password</Label>
-                    <Input id="signup-password" type="password" minLength={8} required />
+                    <Input id="signup-password" name="password" type="password" minLength={8} required />
                     <p className="text-xs text-muted-foreground">Minimum 8 characters</p>
                   </div>
                   
