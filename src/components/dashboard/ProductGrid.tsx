@@ -14,12 +14,19 @@ const mockProducts = [
     image: "https://images.unsplash.com/photo-1585515320310-259814833e62?w=400&h=400&fit=crop",
     price: "$49.99",
     originalPrice: "$79.99",
-    profit: "34%",
+    profit: "$16.82",
     trend: "💎 Winner",
     sales: "3.5K sales/week",
     supplierLink: "https://cjdropship.com/what-to-sell/dropshipping-portable-blender-in-2022/",
     niche: "home",
     country: "us",
+    cost: "$33.17",
+    adTrendInfo: "Listed as winning product in dropship tools; moderate competition on TikTok and Facebook.",
+    imageLinks: [
+      "https://m.media-amazon.com/images/I/71e+QllPFrL.jpg",
+      "https://m.media-amazon.com/images/I/81skhWMDoPL.jpg",
+      "https://image.doba.com/dg7-gGKtqSEivobI/portable-juicer-blender-usb-rechargeable-juicer-cup-fruit-baby-food-mixing-machine-with-6-blades-powerful-motor.webp"
+    ],
   },
   {
     id: "2",
@@ -27,12 +34,19 @@ const mockProducts = [
     image: "https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=400&h=400&fit=crop",
     price: "$45.00",
     originalPrice: "$65.00",
-    profit: "60%",
+    profit: "$27.00",
     trend: "🔥 Hot",
     sales: "2.8K sales/week",
     supplierLink: "https://www.spocket.co/dropship/other/profesional-digital-kitchen-thermometer-barbecue-water-oil-coking-meat-453514",
     niche: "home",
     country: "us",
+    cost: "$18.00",
+    adTrendInfo: "Smart meat thermometers trending in 2025; low competition, high margin potential.",
+    imageLinks: [
+      "https://m.media-amazon.com/images/I/61C9DAvebML.jpg",
+      "https://m.media-amazon.com/images/I/71fKnd6Cz6L._UF1000,1000_QL80_.jpg",
+      "https://image.doba.com/dg7-YtQZFEmvnJbz/100ft-smart-wireless-meat-thermometer-digital-thermospike-meat-probe-with-app-control-for-oven-grill-kitchen-bbq-smoker-rotisserie.webp"
+    ],
   },
   
   // Health & Fitness
